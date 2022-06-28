@@ -2,6 +2,7 @@
 #include "Fwindow.h"
 #include <fstream>
 #include <sstream>
+#include "TalkTable.h"
 
 class UserWindow :
     public Fwindow

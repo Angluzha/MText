@@ -97,6 +97,7 @@
   <ItemGroup>
     <ClCompile Include="DeleteUser.cpp" />
     <ClCompile Include="RepairUserName.cpp" />
+    <ClCompile Include="TalkTable.cpp" />
     <ClCompile Include="UserWindow.cpp" />
     <QtRcc Include="MText.qrc" />
     <QtMoc Include="MText.h" />
@@ -118,6 +119,7 @@
     <QtMoc Include="adminwindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TalkTable.h" />
     <ClInclude Include="UserWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -47,7 +47,7 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 	setWindowTitle("V_V网络");
 	
 	resize(QSize(300, 600));
-	//setFixedSize(this->width(), this->height());//禁止修改窗口大小
+	setFixedSize(this->width(), this->height());//禁止修改窗口大小
 }
 
 void UserWindow::addFriendList()
@@ -133,7 +133,8 @@ void UserWindow::refreshWindow()
 
 void UserWindow::createTalkTable(QListWidgetItem* item)//
 {
-	setWindowTitle(item->statusTip());
+	string str = item->statusTip().toStdString();;
+	new TalkTable(mysql,str);
 }
 
 void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr)

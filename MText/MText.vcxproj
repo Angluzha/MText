@@ -65,7 +65,7 @@
       <AdditionalDependencies>libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <StructMemberAlignment>1Byte</StructMemberAlignment>
+      <StructMemberAlignment>Default</StructMemberAlignment>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -96,7 +96,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DeleteUser.cpp" />
-    <ClCompile Include="FriendList.cpp" />
     <ClCompile Include="RepairUserName.cpp" />
     <ClCompile Include="UserWindow.cpp" />
     <QtRcc Include="MText.qrc" />
@@ -119,7 +118,6 @@
     <QtMoc Include="adminwindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FriendList.h" />
     <ClInclude Include="UserWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

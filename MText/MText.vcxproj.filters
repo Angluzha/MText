@@ -67,9 +67,6 @@
     <ClCompile Include="UserWindow.cpp">
       <Filter>Source Files\userwindow</Filter>
     </ClCompile>
-    <ClCompile Include="FriendList.cpp">
-      <Filter>Source Files\userwindow</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Fwindow.h">
@@ -93,9 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UserWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FriendList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

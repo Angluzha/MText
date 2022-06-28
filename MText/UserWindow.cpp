@@ -12,7 +12,7 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 	friendWidget_->setResizeMode(QListView::Adjust);//适应布局调整
 	friendWidget_->setMovement(QListView::Static);//不能移动
 	friendWidget_->setGeometry(0,130,300,470);
-	QObject::connect(friendWidget_, &QListWidget::itemClicked, this, &UserWindow::createTalkTable);//
+	QObject::connect(friendWidget_,&QListWidget::itemClicked, this,&UserWindow::createTalkTable);//
 
 	LabelID = new QLabel(this);
 	LabelID->setText(("ID：" + ID).c_str());
@@ -47,7 +47,7 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 	setWindowTitle("V_V网络");
 	
 	resize(QSize(300, 600));
-	setFixedSize(this->width(), this->height());//禁止修改窗口大小
+	//setFixedSize(this->width(), this->height());//禁止修改窗口大小
 }
 
 void UserWindow::addFriendList()
@@ -75,9 +75,8 @@ void UserWindow::addFriendList()
 
 		sprintf(sql, "昵称：%s \nID：%s                            %s条新信息", row[0], rowFriend[0], rowFriend[1]);
 
-		FriendList* Item = new FriendList();
-		Item->setFriendClass(rowFriend[2]);
-		Item->setTalkTable(rowFriend[3]);
+		QListWidgetItem* Item = new QListWidgetItem();
+		Item->setStatusTip(rowFriend[3]);//找个容器存下talk表值
 
 		//将Blob类型数据转换为png类型并保存到./image/Avatar/%s.png下以供使用
 		char IDAddStr[30];
@@ -132,10 +131,9 @@ void UserWindow::refreshWindow()
 	this->setWindowTitle("refresh");
 }
 
-void UserWindow::createTalkTable(FriendList* Item)
+void UserWindow::createTalkTable(QListWidgetItem* item)//
 {
-	//Item->getTalkTable();
-	setWindowTitle(Item->getTalkTable().c_str());
+	setWindowTitle(item->statusTip());
 }
 
 void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr)

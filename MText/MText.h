@@ -5,6 +5,7 @@
 #include "qlineedit.h"
 #include "qlabel.h"
 #include "qstring.h"
+#include <QMovie>
 //字符串组件
 #include <string>
 #include <iostream>

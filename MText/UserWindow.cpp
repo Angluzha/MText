@@ -134,7 +134,7 @@ void UserWindow::refreshWindow()
 void UserWindow::createTalkTable(QListWidgetItem* item)//
 {
 	string str = item->statusTip().toStdString();;
-	new TalkTable(mysql,str);
+	new TalkTable(mysql,str,ID);
 }
 
 void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr)

@@ -7,7 +7,7 @@ MText::MText(QWidget *parent)
     //添加右侧图片
     LabelPNG = new QLabel(this);
     LabelPNG->show();
-    LabelPNG->setPixmap(QPixmap("远山A.Png"));
+    LabelPNG->setPixmap(QPixmap("./image/远山A.png"));
     LabelPNG->setGeometry(0, 0, 800, 450);//320,0,480,450
 
     //初始化账号密码输入框与登录按钮
@@ -76,26 +76,41 @@ void MText::SqlLink(string ID, string Password)
         res = mysql_store_result(mysql);
 
         row = mysql_fetch_row(res); //获取mysql结果集
-
+        
+        QMovie* movie = new QMovie("./image/PUI.gif");//路径要用双斜杠
+        LabelPNG->setMovie(movie);
+        LabelPNG->setScaledContents(true);//用来自适应label大小，图片填充label空间
+        movie->start();
 
         //row[0]进入管理员界面 row[1]进入用户界面 
         string login = row[0];
         if (login == "admin")
         {
-            SonWindow = new adminwindow;
+            setWindowTitle("登录成功");
+            LineEditID->hide();
+            LineEditPassword->hide();
+            ButtonLogin->hide();
+
+           /* SonWindow = new adminwindow;
             SonWindow->addmysql(mysql);
             SonWindow->fixwindow(ID);
             SonWindow->setWindowTitle("管理员界面");
-            SonWindow->show();
+            SonWindow->show();*/
+
+           
 
         }
         if(login  == "user")
         {
            setWindowTitle("登录成功");
-           SonWindow = new UserWindow(mysql,ID);
-           SonWindow->show();
+           LineEditID->hide();
+           LineEditPassword->hide();
+           ButtonLogin->hide();
+
+           /*SonWindow = new UserWindow(mysql,ID);
+           SonWindow->show();*/
         }
-        close();
+        //close();
 
         //释放结果集
         mysql_free_result(res);

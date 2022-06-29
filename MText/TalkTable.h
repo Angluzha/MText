@@ -6,15 +6,20 @@
 #include <QTextEdit.h>
 #include <QListWidget.h>
 #include <qpushbutton.h>
+#include <time.h>
 using namespace std;
 
 class TalkTable :
     public QWidget
 {
+    Q_OBJECT
 public:
     TalkTable(MYSQL* _mySql,string _talkTable,string _ID);
     void fillingWindow();
     void getMessage();
+public slots:
+    void sendMessage();
+    void clearText();
 private:
     MYSQL* mySql_;
     QTextEdit* lineInputBox_;
@@ -23,5 +28,6 @@ private:
     QPushButton* btnClear_;
     string talkTable_;
     string ID_;
+    string friendID_;
 };
 

@@ -70,6 +70,9 @@
     <ClCompile Include="TalkTable.cpp">
       <Filter>Source Files\userwindow</Filter>
     </ClCompile>
+    <ClCompile Include="AddFriend.cpp">
+      <Filter>Source Files\按钮组件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Fwindow.h">
@@ -90,12 +93,15 @@
     <QtMoc Include="DeleteUser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="TalkTable.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="AddFriend.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UserWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TalkTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

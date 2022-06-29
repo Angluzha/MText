@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "TalkTable.h"
+#include "AddFriend.h"
 
 class UserWindow :
     public Fwindow
@@ -13,10 +14,12 @@ public:
     void addFriendList();
 public slots:
     void btnRefresh();
-    void refreshWindow();
+    void reWindow();
     void createTalkTable(QListWidgetItem* item);
+    void addFriend();
 private:
     QListWidget *friendWidget_;
+    QPushButton* btnAddFriend_;
 
 };
 

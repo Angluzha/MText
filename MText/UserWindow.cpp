@@ -38,10 +38,15 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 	btnRepair_->setStyleSheet("QPushButton{font:10px;}");
 	QObject::connect(btnRepair_, SIGNAL(clicked(void)), this, SLOT(repairUserName()));
 	
+	btnAddFriend_ = new QPushButton("添加好友", this);
+	btnAddFriend_->setGeometry(120, 90, 60, 40);
+	btnAddFriend_->setStyleSheet("QPushButton{font:10px;}");
+	QObject::connect(btnAddFriend_, SIGNAL(clicked(void)), this, SLOT(addFriend()));
+
 	btnRefresh_ = new QPushButton("刷新界面", this);
-	btnRefresh_->setGeometry(120, 90, 60, 40);
+	btnRefresh_->setGeometry(180, 90, 60, 40);
 	btnRefresh_->setStyleSheet("QPushButton{font:10px;}");
-	QObject::connect(btnRefresh_, SIGNAL(clicked(void)), this, SLOT(refreshWindow()));
+	QObject::connect(btnRefresh_, SIGNAL(clicked(void)), this, SLOT(reWindow()));
 
 	fillingWindow();
 	setWindowTitle("V_V网络");
@@ -125,10 +130,9 @@ void UserWindow::fillingWindow()
 	if (result)mysql_free_result(result), result = nullptr;
 }
 
-void UserWindow::refreshWindow()
+void UserWindow::reWindow()
 {
-	this->fillingWindow();
-	this->setWindowTitle("refresh");
+	fillingWindow();
 }
 
 void UserWindow::createTalkTable(QListWidgetItem* item)//
@@ -152,4 +156,7 @@ void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr)
 	cout << endl;
 }
 
-
+void UserWindow::addFriend()
+{
+	new AddFriend();
+}

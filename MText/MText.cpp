@@ -76,16 +76,16 @@ void MText::SqlLink(string ID, string Password)
     {
         setWindowTitle("登录中。。。。。。。。。。。");
 
+        QMovie* movie = new QMovie("./image/PUI.gif");//路径要用双斜杠
+        LabelPNG->setMovie(movie);
+        LabelPNG->setScaledContents(true);//用来自适应label大小，图片填充label空间
+        movie->start();
+
         string SelLogin= "SELECT sort FROM usertable WHERE ID ="+ID+";";//查询ID类别 0为管理员 1为普通用户
         mysql_query(mysql, SelLogin.c_str());//
         res = mysql_store_result(mysql);
 
         row = mysql_fetch_row(res); //获取mysql结果集
-        
-        QMovie* movie = new QMovie("./image/PUI.gif");//路径要用双斜杠
-        LabelPNG->setMovie(movie);
-        LabelPNG->setScaledContents(true);//用来自适应label大小，图片填充label空间
-        movie->start();
 
         //row[0]进入管理员界面 row[1]进入用户界面 
         string login = row[0];

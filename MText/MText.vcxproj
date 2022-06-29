@@ -95,6 +95,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddFriend.cpp" />
     <ClCompile Include="DeleteUser.cpp" />
     <ClCompile Include="RepairUserName.cpp" />
     <ClCompile Include="TalkTable.cpp" />
@@ -119,8 +120,11 @@
     <QtMoc Include="adminwindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TalkTable.h" />
+    <QtMoc Include="TalkTable.h" />
     <ClInclude Include="UserWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="AddFriend.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

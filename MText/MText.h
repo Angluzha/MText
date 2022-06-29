@@ -30,6 +30,7 @@ public slots:
     void LoginCilck();
 private:
     QPushButton *ButtonLogin;
+    QPushButton* btnClose_;
     QLineEdit   *LineEditID;
     QLineEdit   *LineEditPassword;
     QLabel      *LabelPNG;

@@ -10,6 +10,7 @@ TalkTable::TalkTable(MYSQL* _mySql, string _talkTable,string _ID)
 	outputBox_->setGeometry(0, 0, 600, 300);
 	outputBox_->setStyleSheet("background-color:rgb(204,204,204)");
 	outputBox_->setFlow(QListView::TopToBottom);
+	outputBox_->setIconSize(QSize(50, 50));
 
 	lineInputBox_ = new QTextEdit(this);
 	lineInputBox_->setGeometry(0,300,600,100);
@@ -38,22 +39,23 @@ void TalkTable::getMessage()
 	mysql_real_query(mySql_, sql, strlen(sql));
 	result = mysql_store_result(mySql_);
 	//循环获取每一行数据数据
-
-	while ((row = mysql_fetch_row(result)) != NULL)
+	if(result!=NULL)
 	{
-		QListWidgetItem* Item = new QListWidgetItem();
-		Item->setTextAlignment(Qt::AlignRight | Qt::AlignHCenter);
-		char IDAddStr[30];
-		sprintf(IDAddStr, "./image/Avatar/%s.png", "100003");
+		while ((row = mysql_fetch_row(result)) != NULL)
+		{
+			QListWidgetItem* Item = new QListWidgetItem();
+			Item->setTextAlignment(Qt::AlignLeft | Qt::AlignLeft);
+			char IDAddStr[30];
+			sprintf(IDAddStr, "./image/Avatar/%s.png",row[0]);
 
-		Item->setSizeHint(QSize(280, 65));
-		Item->setIcon(QIcon(IDAddStr));//QIcon("./image/Avatar/100001.png")
-		Item->setText("Textaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		QWidget *widget={};
-		widget->resize(QSize(100,100));
+			Item->setSizeHint(QSize(280, 65));
+			Item->setIcon(QIcon(IDAddStr));//QIcon("./image/Avatar/100001.png")
+			
+			char testStr[500];
+			sprintf(testStr, "%s\n%s", row[2],row[1]);//"%s       %s\n%s",row[0], row[3],row[1]
+			Item->setText(testStr);
 
-		widget->show();
-
-		outputBox_->setItemWidget(Item,widget);
+			outputBox_->addItem(Item);
+		}
 	}
 }

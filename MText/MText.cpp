@@ -4,20 +4,25 @@
 MText::MText(QWidget *parent)
     : QMainWindow(parent)
 {
+    setWindowFlags(Qt::FramelessWindowHint);
     //添加右侧图片
     LabelPNG = new QLabel(this);
     LabelPNG->show();
-    LabelPNG->setPixmap(QPixmap("./image/远山A.png"));
-    LabelPNG->setGeometry(0, 0, 800, 450);//320,0,480,450
+    LabelPNG->setPixmap(QPixmap("./image/PUI.png"));
+    LabelPNG->setGeometry(0, 0, 400, 300);//320,0,480,450
+    LabelPNG->setScaledContents(true);//图片自适应大小
 
     //初始化账号密码输入框与登录按钮
     ButtonLogin = new QPushButton("登录", this);
+    btnClose_ = new QPushButton("X", this);
     LineEditID = new QLineEdit(this);
     LineEditPassword = new QLineEdit(this);
 
     //将登录按钮移动到合适位置
     ButtonLogin->setGeometry(120, 230, 160, 30);
     ButtonLogin->setStyleSheet("QPushButton{font:18px;}");
+    btnClose_->setGeometry(360,0,40,40);
+    btnClose_->setStyleSheet("font:30px;color: rgb(255,255,255); background - color: rgb(0,0,0);border :none");
 
     //将账号密码输入框移动到合社位置
     LineEditID->setGeometry(100, 150, 200, 25);//move(150, 150);
@@ -36,7 +41,7 @@ MText::MText(QWidget *parent)
 
     //点击登录按钮跳转到LoginClick()
     QObject::connect(ButtonLogin, SIGNAL(clicked(void)), this, SLOT(LoginCilck()));
-
+    QObject::connect(btnClose_, SIGNAL(clicked(void)), this, SLOT(close()));
 }
 
 
@@ -91,11 +96,11 @@ void MText::SqlLink(string ID, string Password)
             LineEditPassword->hide();
             ButtonLogin->hide();
 
-           /* SonWindow = new adminwindow;
+            SonWindow = new adminwindow;
             SonWindow->addmysql(mysql);
             SonWindow->fixwindow(ID);
             SonWindow->setWindowTitle("管理员界面");
-            SonWindow->show();*/
+            SonWindow->show();
 
            
 
@@ -107,10 +112,10 @@ void MText::SqlLink(string ID, string Password)
            LineEditPassword->hide();
            ButtonLogin->hide();
 
-           /*SonWindow = new UserWindow(mysql,ID);
-           SonWindow->show();*/
+           SonWindow = new UserWindow(mysql,ID);
+           SonWindow->show();
         }
-        //close();
+        close();
 
         //释放结果集
         mysql_free_result(res);

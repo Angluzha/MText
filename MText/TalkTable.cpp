@@ -25,6 +25,16 @@ TalkTable::TalkTable(MYSQL* _mySql, string _talkTable,string _ID)
 		friendID_ = talkTable_.substr(0, 6);
 	}
 
+	MYSQL_RES* resultName = NULL;
+	MYSQL_ROW rowName = nullptr;
+
+	string sqlW="SELECT name FROM `usertable` WHERE `ID` = "+friendID_;
+	mysql_query(mySql_, sqlW.c_str());
+	resultName = mysql_store_result(mySql_);
+	rowName = mysql_fetch_row(resultName);
+
+	setWindowTitle(rowName[0]);
+
 	outputBox_ = new QListWidget(this);
 	outputBox_->setGeometry(0, 0, 600, 300);
 	outputBox_->setStyleSheet("background-color:rgb(204,204,204)");
@@ -48,6 +58,7 @@ TalkTable::TalkTable(MYSQL* _mySql, string _talkTable,string _ID)
 	resize(QSize(600, 400));
 	setFixedSize(this->width(), this->height());//禁止修改窗口大小
 	show();
+
 	fillingWindow();
 }
 void TalkTable::fillingWindow()

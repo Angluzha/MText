@@ -12,7 +12,7 @@ uesrWindow::uesrWindow(MYSQL* _mySql, string _ID)
 	friendWidget_->setResizeMode(QListView::Adjust);//适应布局调整
 	friendWidget_->setMovement(QListView::Static);//不能移动
 	friendWidget_->setGeometry(0, 130, 300, 470);
-	//QObject::connect(friendWidget_, &QListWidget::itemClicked, this, &uesrWindow::createTalkTable);//
+	QObject::connect(friendWidget_, &QListWidget::itemClicked, this, &uesrWindow::createTalkTable);//
 
 	LabelID = new QLabel(this);
 	LabelID->setText(("ID：" + ID).c_str());

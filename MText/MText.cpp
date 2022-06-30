@@ -112,7 +112,7 @@ void MText::SqlLink(string ID, string Password)
            LineEditPassword->hide();
            ButtonLogin->hide();
 
-           SonWindow = new UserWindow(mysql,ID);
+           SonWindow = new uesrWindow(mysql,ID);
            SonWindow->show();
         }
         close();

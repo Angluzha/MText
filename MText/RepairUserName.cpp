@@ -11,7 +11,7 @@ RepairUserName::RepairUserName(MYSQL* _mySql,string _ID)
 	mySql_ = _mySql;
 
 	resize(QSize(200, 100));
-	//setFixedSize(this->width(), this->height());//禁止修改窗口大小
+	setFixedSize(this->width(), this->height());//禁止修改窗口大小
 	show();
 	setWindowIcon(QIcon("./image/V_V.ico"));
 	setWindowTitle(" ");
@@ -19,9 +19,15 @@ RepairUserName::RepairUserName(MYSQL* _mySql,string _ID)
 void RepairUserName::yes()
 {
 	//获取结果集
-	char sqlW[100];
-	sprintf(sqlW,"UPDATE `mtest`.`usertable` SET `name` = '%s' WHERE `usertable`.`ID` = %s", lineUserName_->text().toLatin1().data(),ID_.c_str());
-	mysql_query(mySql_, sqlW);
+	//char sqlW[100];
+	//sprintf(sqlW,"UPDATE `mtest`.`usertable` SET `name` = '%s' WHERE `usertable`.`ID` = %s", lineUserName_->text().toLatin1().data(),ID_.c_str());
+	string sqlW ="UPDATE `mtest`.`usertable` SET `name` = '";
+	sqlW += lineUserName_->text().toStdString();
+	sqlW += "' WHERE `usertable`.`ID` = ";
+	sqlW += ID_;
+	sqlW += ";";
+
+	mysql_query(mySql_, sqlW.c_str());
 
 	close();
 }

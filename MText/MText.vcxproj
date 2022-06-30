@@ -99,7 +99,7 @@
     <ClCompile Include="DeleteUser.cpp" />
     <ClCompile Include="RepairUserName.cpp" />
     <ClCompile Include="TalkTable.cpp" />
-    <ClCompile Include="UserWindow.cpp" />
+    <ClCompile Include="uesrWindow.cpp" />
     <QtRcc Include="MText.qrc" />
     <QtMoc Include="MText.h" />
     <ClCompile Include="AddAvatar.cpp" />
@@ -121,10 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TalkTable.h" />
-    <ClInclude Include="UserWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="AddFriend.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="uesrWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

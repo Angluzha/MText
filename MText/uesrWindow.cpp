@@ -1,7 +1,7 @@
-﻿#include "UserWindow.h"
+﻿#include "uesrWindow.h"
 void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr);
 
-UserWindow::UserWindow(MYSQL* _mySql, string _ID) 
+uesrWindow::uesrWindow(MYSQL* _mySql, string _ID)
 {
 	mysql = _mySql;
 	ID = _ID;
@@ -11,8 +11,8 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 	friendWidget_->setIconSize(QSize(50, 50));//设置图片大小
 	friendWidget_->setResizeMode(QListView::Adjust);//适应布局调整
 	friendWidget_->setMovement(QListView::Static);//不能移动
-	friendWidget_->setGeometry(0,130,300,470);
-	QObject::connect(friendWidget_,&QListWidget::itemClicked, this,&UserWindow::createTalkTable);//
+	friendWidget_->setGeometry(0, 130, 300, 470);
+	//QObject::connect(friendWidget_, &QListWidget::itemClicked, this, &uesrWindow::createTalkTable);//
 
 	LabelID = new QLabel(this);
 	LabelID->setText(("ID：" + ID).c_str());
@@ -32,12 +32,12 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 	ButtonUpataAvatar->setGeometry(0, 90, 60, 40);
 	ButtonUpataAvatar->setStyleSheet("QPushButton{font:10px;}");
 	QObject::connect(ButtonUpataAvatar, SIGNAL(clicked(void)), this, SLOT(CreateAddAvatar()));
-	
+
 	btnRepair_ = new QPushButton("修改昵称", this);
 	btnRepair_->setGeometry(60, 90, 60, 40);
 	btnRepair_->setStyleSheet("QPushButton{font:10px;}");
 	QObject::connect(btnRepair_, SIGNAL(clicked(void)), this, SLOT(repairUserName()));
-	
+
 	btnAddFriend_ = new QPushButton("添加好友", this);
 	btnAddFriend_->setGeometry(120, 90, 60, 40);
 	btnAddFriend_->setStyleSheet("QPushButton{font:10px;}");
@@ -50,12 +50,39 @@ UserWindow::UserWindow(MYSQL* _mySql, string _ID)
 
 	fillingWindow();
 	setWindowTitle("V_V网络");
-	
+
 	resize(QSize(300, 600));
 	setFixedSize(this->width(), this->height());//禁止修改窗口大小
 }
 
-void UserWindow::addFriendList()
+void uesrWindow::fillingWindow()
+{
+	char IDAddStr[30];//地址最大长度为35位
+	sprintf(IDAddStr, "./image/Avatar/%s.png", ID.c_str());
+
+	//获取结果集
+	MYSQL_RES* result = NULL;
+	//执行查询
+	char sql[70];
+	sprintf(sql, "SELECT avatar,name FROM `usertable` WHERE ID =  %s", ID.c_str());
+	mysql_real_query(mysql, sql, strlen(sql));
+	result = mysql_store_result(mysql);
+
+	//循环获取每一行数据数据
+	MYSQL_ROW row = nullptr;
+	row = mysql_fetch_row(result);
+	unsigned long length = mysql_fetch_lengths(result)[0];
+	bolbCPNG(row[0], length, IDAddStr);
+
+	LabelName->setText(row[1]);
+	LabelPNG->setPixmap(QPixmap(IDAddStr));//
+
+	addFriendList();
+
+	//释放资源-结果集
+	if (result)mysql_free_result(result), result = nullptr;
+}
+void uesrWindow::addFriendList()
 {
 	friendWidget_->clear();
 	//获取结果集
@@ -102,43 +129,15 @@ void UserWindow::addFriendList()
 	if (resultID)mysql_free_result(resultID), resultID = nullptr;
 }
 
-void UserWindow::fillingWindow()
-{
-	char IDAddStr[30];//地址最大长度为35位
-	sprintf(IDAddStr, "./image/Avatar/%s.png", ID.c_str());
-
-	//获取结果集
-	MYSQL_RES* result = NULL;
-	//执行查询
-	char sql[70];
-	sprintf(sql, "SELECT avatar,name FROM `usertable` WHERE ID =  %s", ID.c_str());
-	mysql_real_query(mysql, sql, strlen(sql));
-	result = mysql_store_result(mysql);
-
-	//循环获取每一行数据数据
-	MYSQL_ROW row = nullptr;
-	row = mysql_fetch_row(result);
-	unsigned long length = mysql_fetch_lengths(result)[0];
-	bolbCPNG(row[0], length, IDAddStr);
-
-	LabelName->setText(row[1]);
-	LabelPNG->setPixmap(QPixmap(IDAddStr));//
-	
-	addFriendList();
-
-	//释放资源-结果集
-	if (result)mysql_free_result(result), result = nullptr;
-}
-
-void UserWindow::reWindow()
+void uesrWindow::reWindow()
 {
 	fillingWindow();
 }
 
-void UserWindow::createTalkTable(QListWidgetItem* item)//
+void uesrWindow::createTalkTable(QListWidgetItem* item)//
 {
 	string str = item->statusTip().toStdString();;
-	new TalkTable(mysql,str,ID);
+	new TalkTable(mysql, str, ID);
 }
 
 void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr)
@@ -156,7 +155,7 @@ void bolbCPNG(char* m_row, unsigned long length, string avatarAddStr)
 	cout << endl;
 }
 
-void UserWindow::addFriend()
+void uesrWindow::addFriend()
 {
-	new AddFriend();
+	new AddFriend(mysql,ID);
 }

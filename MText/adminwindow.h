@@ -26,5 +26,6 @@ private:
     QWidget     *WidgetUserAdjustment;
     QPushButton *ButtonAddUser;
     QPushButton *btnDeleteUser_;
+    QPushButton* btnRefresh_;
 };
 

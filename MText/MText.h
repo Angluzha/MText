@@ -12,7 +12,7 @@
 //子类窗口组件
 #include "fwindow.h"
 #include "adminwindow.h"
-#include "UserWindow.h"
+#include "uesrWindow.h"
 //数据库组件
 #include <mysql.h>
 

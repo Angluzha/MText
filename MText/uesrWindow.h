@@ -5,21 +5,20 @@
 #include "TalkTable.h"
 #include "AddFriend.h"
 
-class UserWindow :
-    public Fwindow
+class uesrWindow :public Fwindow
 {
+    Q_OBJECT
 public:
-    UserWindow(MYSQL *_mySql,string _ID);
+    uesrWindow(MYSQL* _mySql, string _ID);
     void fillingWindow();
     void addFriendList();
 public slots:
-    void btnRefresh();
     void reWindow();
     void createTalkTable(QListWidgetItem* item);
     void addFriend();
 private:
-    QListWidget *friendWidget_;
+    QListWidget* friendWidget_;
     QPushButton* btnAddFriend_;
-
+    QPushButton* btnRefresh_;
 };
 

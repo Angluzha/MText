@@ -11,12 +11,13 @@ class AddFriend :
 {
     Q_OBJECT
 public:
-    AddFriend(MYSQL *_mySql);
+    AddFriend(MYSQL *_mySql,string _ID);
 public slots:
     void btnYes();
 private:
     QLineEdit *lineAddID_;
     QPushButton *btnAddYes_;
+    string ID_;
     MYSQL* mySql_;
 };
 

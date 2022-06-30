@@ -64,14 +64,14 @@
     <ClCompile Include="DeleteUser.cpp">
       <Filter>Source Files\按钮组件</Filter>
     </ClCompile>
-    <ClCompile Include="UserWindow.cpp">
-      <Filter>Source Files\userwindow</Filter>
-    </ClCompile>
     <ClCompile Include="TalkTable.cpp">
       <Filter>Source Files\userwindow</Filter>
     </ClCompile>
     <ClCompile Include="AddFriend.cpp">
       <Filter>Source Files\按钮组件</Filter>
+    </ClCompile>
+    <ClCompile Include="uesrWindow.cpp">
+      <Filter>Source Files\userwindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,10 +99,8 @@
     <QtMoc Include="AddFriend.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="UserWindow.h">
+    <QtMoc Include="uesrWindow.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </QtMoc>
   </ItemGroup>
 </Project>

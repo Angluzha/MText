@@ -30,7 +30,6 @@ public slots:
 public:
     QPushButton* ButtonUpataAvatar;
     QPushButton* btnRepair_;
-    QPushButton* btnRefresh_;
     QLabel* LabelPNG;
     QLabel *LabelID;
     QLabel* LabelName;
